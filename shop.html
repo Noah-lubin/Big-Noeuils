@@ -23,13 +23,55 @@
     <!-- Barre de recherche -->
     <div class="container_up">
         <div class="search-container">
-            <input type="text" placeholder="Rechercher...">
-            <button type="submit">Rechercher</button>
+            <input type="text" id="searchInput" placeholder="Rechercher...">
+            <button type="button" onclick="search()">OK</button>
         </div>
     </div>
 
-    <!--page-->
-    <div class="container_shop"></div>
+    <!-- Liste des produits -->
+    <ul id="productList">
+        <li class="container_shop">
+            <img src="./image/jersey1.jpg" alt="Maillot de Lubsilubs">
+            <p>Maillot de Lubsilubs</p>
+        </li>
+        <li class="container_shop">
+            <img src="./image/jersey2.jpg" alt="Maillot de greg">
+            <p>Maillot de greg</p>
+        </li>
+        <li class="container_shop">
+            <img src="./image/jersey3.jpg" alt="Maillot de titou">
+            <p>Maillot de titou</p>
+        </li>
+        <li class="container_shop">
+            <img src="./image/jersey4.jpg" alt="Maillot de adrilux">
+            <p>Maillot de adrilux</p>
+        </li>
+    </ul>
+
+    <script>
+        // Fonction pour exécuter la recherche
+        function search() {
+            var searchText = document.getElementById('searchInput').value.toLowerCase();
+            var products = document.querySelectorAll('#productList .container_shop');
+
+            products.forEach(function(product) {
+                var productName = product.getElementsByTagName('p')[0].textContent.toLowerCase();
+
+                if (productName.includes(searchText)) {
+                    product.style.display = 'flex'; // Afficher le produit
+                } else {
+                    product.style.display = 'none'; // Cacher le produit
+                }
+            });
+        }
+
+        // Écouter l'événement de la touche Entrée
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                search(); // Lancer la recherche si la touche Entrée est pressée
+            }
+        });
+    </script>
 
 </body>
 
