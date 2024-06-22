@@ -1,0 +1,169 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container_header {
+    background-color: black;
+    color: blueviolet;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.container_header .logo img {
+    width: 25%;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.container_header .logo img:hover {
+    transform: scale(1.1);
+}
+
+.nav_menu {
+    display: flex;
+    gap: 10%;
+}
+
+.nav_item {
+    color: blueviolet;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+    margin-right: 50px;
+}
+
+.nav_item::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: blueviolet;
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav_item:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.nav_item:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.container_index {
+    width: 100%;
+    height: 600px;
+    background-image: url('./image/nous4.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 20px;
+    color: white;
+    margin-top: 0px;
+}
+
+.nav_page {
+    font-size: 75px;
+    color: blueviolet;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+    margin-right: 50px;
+}
+
+.nav_page::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background-color: blueviolet;
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav_page:hover {
+    color: rgb(255, 255, 255);
+    transform: scale(1.1);
+}
+
+.nav_page:hover::after {
+    transform: scaleX(1);
+    transform-origin: top;
+}
+
+.container_item {
+    border-radius: 20px;
+    width: 33%;
+    position: relative;
+    overflow: hidden;
+}
+
+.hover_content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hover_content img {
+    width: 100%;
+    border-radius: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.hover_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hover_overlay img {
+    width: 30%;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.hover_text {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+}
+
+.container_item:hover .hover_content {
+    opacity: 1;
+}
+.container_item:hover .hover_overlay {
+    opacity: 1;
+}
+
+.container_item:hover .hover_content img {
+    opacity: 0.3;
+}
