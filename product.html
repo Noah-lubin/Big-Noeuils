@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="styleshop.css">
+    <meta charset="UTF-8">
+    <meta name="description" content="Un site, une équipe, 4 champions">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Neuils - Product</title>
+</head>
+<body>
+    <header class="container_header">
+        <a href="index-big-neuils.html" class="logo"><img src="./image/title.png" alt="home"></a>
+        <nav class="nav_menu">
+            <a href="shop.html" class="nav_item">Shop</a>
+            <a href="news.html" class="nav_item">News</a>
+            <a href="team.html" class="nav_item">Team</a>
+        </nav>
+    </header>
+
+    <div id="productDetails" class="product-details"></div>
+
+    <script src="data.js"></script>
+    <script>
+        function getProductByCode(code) {
+            return data.products.find(product => product.code === code);
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productCode = urlParams.get('code');
+        const product = getProductByCode(productCode);
+
+        if (product) {
+            const productDetails = document.getElementById('productDetails');
+            const productHTML = `
+                <div class="product-container">
+                    <h1>${product.product_name}</h1>
+                    <div class="product-images">
+                        <img src="${product.image_avant}" alt="${product.product_name} avant" class="product-image">
+                        <img src="${product.image_arriere}" alt="${product.product_name} arrière" class="product-image">
+                    </div>
+                    <p class="product-description">${product.description}</p>
+                </div>
+            `;
+            productDetails.innerHTML = productHTML;
+        } else {
+            document.getElementById('productDetails').innerHTML = '<p>Produit non trouvé.</p>';
+        }
+    </script>
+</body>
+</html>

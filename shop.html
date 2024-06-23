@@ -2,11 +2,11 @@
 <html lang="fr">
 
 <head>
-    <link rel="stylesheet" href="./styleshop.css">
+    <link rel="stylesheet" href="styleshop.css">
     <meta charset="UTF-8">
     <meta name="description" content="Un site, une équipe, 4 champions">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Big Neuils</title>
+    <title>Big Neuils - Shop</title>
 </head>
 
 <body>
@@ -28,33 +28,28 @@
         </div>
     </div>
 
-    <!-- Liste des produits -->
-    <ul id="productList">
-        <li class="container_shop">
-            <img src="./image/jersey1.jpg" alt="Maillot de Lubsilubs">
-            <p>Maillot de Lubsilubs</p>
-        </li>
-        <li class="container_shop">
-            <img src="./image/jersey2.jpg" alt="Maillot de greg">
-            <p>Maillot de greg</p>
-        </li>
-        <li class="container_shop">
-            <img src="./image/jersey3.jpg" alt="Maillot de titou">
-            <p>Maillot de titou</p>
-        </li>
-        <li class="container_shop">
-            <img src="./image/jersey4.jpg" alt="Maillot de adrilux">
-            <p>Maillot de adrilux</p>
-        </li>
-    </ul>
+    <!-- Menu des catégories -->
+    <div class="category-menu">
+        <button onclick="filterCategory('all')" class="active">Tous</button>
+        <button onclick="filterCategory('maillot')">Maillot</button>
+        <button onclick="filterCategory('t-shirt')">T-shirt</button>
+        <button onclick="filterCategory('accessoire')">Accessoire</button>
+        <button onclick="filterCategory('accessoire-bebe')">Accessoires pour bébé</button>
+        <button onclick="filterCategory('sweat-capuche')">Sweat à capuche</button>
+        <button onclick="filterCategory('sweat-sans-capuche')">Sweat sans capuche</button>
+    </div>
 
+    <!-- Liste des produits -->
+    <ul id="productList"></ul>
+
+    <script src="data.js"></script>
     <script>
         // Fonction pour exécuter la recherche
         function search() {
             var searchText = document.getElementById('searchInput').value.toLowerCase();
             var products = document.querySelectorAll('#productList .container_shop');
 
-            products.forEach(function(product) {
+            products.forEach(function (product) {
                 var productName = product.getElementsByTagName('p')[0].textContent.toLowerCase();
 
                 if (productName.includes(searchText)) {
@@ -65,14 +60,63 @@
             });
         }
 
+        // Fonction pour filtrer les catégories
+        function filterCategory(category) {
+            var products = document.querySelectorAll('#productList .container_shop');
+            var buttons = document.querySelectorAll('.category-menu button');
+
+            buttons.forEach(function (button) {
+                button.classList.remove('active');
+            });
+
+            event.target.classList.add('active');
+
+            products.forEach(function (product) {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'flex'; // Afficher le produit
+                } else {
+                    product.style.display = 'none'; // Cacher le produit
+                }
+            });
+        }
+
         // Écouter l'événement de la touche Entrée
-        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+        document.getElementById('searchInput').addEventListener('keyup', function (event) {
             if (event.key === 'Enter') {
                 search(); // Lancer la recherche si la touche Entrée est pressée
             }
         });
-    </script>
 
+        // Appeler l'API et générer la liste des produits
+        async function fetchProducts() {
+            try {
+                const products = data.products;
+                const productList = document.getElementById('productList');
+
+                products.forEach(product => {
+                    const li = document.createElement('li');
+                    li.classList.add('container_shop');
+                    li.dataset.category = product.category;
+
+                    li.innerHTML = `
+                        <div>
+                            <img src="${product.image_avant}" alt="${product.product_name}">
+                            <img src="${product.image_arriere}" alt="${product.product_name}" class="hover_image">
+                        </div>
+                        <a href = "product.html?code=${product.code} " class="nav_item2">"${product.product_name}"</a>
+                        <p>${product.price}</p>
+                    `;
+
+                    productList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        }
+
+        // Appeler la fonction pour charger les produits lors du chargement de la page
+        document.addEventListener('DOMContentLoaded', fetchProducts);
+    </script>
 </body>
 
 </html>
