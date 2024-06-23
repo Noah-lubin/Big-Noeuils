@@ -1,8 +1,8 @@
 body {
+    background-color: blueviolet;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 /* head */  
 .container_header {
@@ -70,14 +70,14 @@ body {
 
 .container_index {
     width: 100%;
-    height: 600px;
-    background-image: url('./image/nous4.JPG'); /* Path to your background image */
+    height: 750px;
+    background-image: url('./image/Equipe2 déchiree.jpg'); /* Path to your background image */
     background-size: cover; /* Make sure the background image covers the entire container */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
     padding: 50px 20px; /* Adjust padding as needed */
     color: white; /* Adjust text color for better readability against background image */
-    margin-top: 0px;
+    margin-top: 50px;
 }
 
 .nav_page {
@@ -104,7 +104,7 @@ body {
 }
 
 .nav_page:hover {
-    color: white;
+    color: rgb(0, 0, 0);
     transform: scale(1.1);
 }
 
@@ -113,48 +113,70 @@ body {
     transform-origin: top;
 }
 
-.container_item {
-    border-radius: 20px;
-    width: 33%;
-    position: relative;
-    overflow: hidden;
-}
-
-.hover_content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.hover_content img {
-    width: 90%;
-    border-radius: 100px;
-    margin-top: 60px;
-    margin-left: 60px;
-    transition: opacity 0.3s ease; 
-}
-
-.hover_text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(255, 255, 255);
-    font-size: 24px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.container_item:hover .hover_content img {
-    opacity: 0.9;
-}
-
-.container_item:hover .hover_text {
-    opacity: 1;
-}
-
 .container {
     display: flex;
     flex-wrap: wrap;
+}
+
+.container_item {
+    position: relative;
+    width: 42%;
+    margin: 60px;
+}
+
+.container_item img {
+    width: 100%;
+    border-radius: 100px;
+    transition: opacity 0.3s ease;
+}
+
+.hover_image {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.container_item:hover img {
+    display: none;
+}
+
+.container_item:hover .hover_image {
+    display: block;
+}
+
+.nav_item2 {
+    color: blueviolet;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+    margin-right: 50px;
+}
+
+.nav_item2::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: blueviolet;
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav_item2:hover {
+    color: rgb(0, 0, 0);
+    transform: scale(1.1);
+}
+
+.nav_item2:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
