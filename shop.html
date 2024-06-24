@@ -50,8 +50,7 @@
             var products = document.querySelectorAll('#productList .container_shop');
 
             products.forEach(function (product) {
-                var productName = product.getElementsByTagName('p')[0].textContent.toLowerCase();
-
+                var productName = product.querySelector('.nav_item2').textContent.toLowerCase();
                 if (productName.includes(searchText)) {
                     product.style.display = 'flex'; // Afficher le produit
                 } else {
@@ -99,12 +98,12 @@
                     li.dataset.category = product.category;
 
                     li.innerHTML = `
-                        <div>
-                            <img src="${product.image_avant}" alt="${product.product_name}">
+                        <div class="product_image_container">
+                            <img src="${product.image_avant}" alt="${product.product_name}" class="product_image">
                             <img src="${product.image_arriere}" alt="${product.product_name}" class="hover_image">
                         </div>
-                        <a href = "product.html?code=${product.code} " class="nav_item2">"${product.product_name}"</a>
-                        <p>${product.price}</p>
+                        <a href="product.html?code=${product.code}" class="nav_item2">${product.product_name}</a>
+                        <p class="product_price">${product.price}</p>
                     `;
 
                     productList.appendChild(li);
